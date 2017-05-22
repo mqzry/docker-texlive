@@ -18,28 +18,25 @@ RUN export LANG=C.UTF-8 &&\
 # install TeX Live and ghostscript
     apt-get install -f -y ghostscript=9.18* \
                           make=4.1* \
-                          texlive-full=2015.2016* \
-                          texlive-fonts-recommended=2015.2016* \
+                          texlive-latex-recommended=2015.2016* \
                           texlive-math-extra=2015.2016* \
                           texlive-luatex=2015.2016* \
                           texlive-pstricks=2015.2016* \
-                          texlive-science=2015.2016* \
                           texlive-xetex=2015.2016* &&\
+                          software-properties-common &&\\
 # free huge amount of unused space
     apt-get purge -f -y make-doc \
-                        texlive-fonts-extra-doc \
                         texlive-fonts-recommended-doc \
-                        texlive-humanities-doc \
                         texlive-latex-base-doc \
                         texlive-latex-extra-doc \
                         texlive-latex-recommended-doc \
                         texlive-metapost-doc \
                         texlive-pictures-doc \
-                        texlive-pstricks-doc \
-                        texlive-science-doc
+                        texlive-pstricks-doc
+                      
 
 # Install php
-RUN apt-get install python-software-properties &&\
+RUN apt-get install -f -y python-software-properties &&\
     add-apt-repository ppa:ondrej/php &&\
     apt-get update &&\
     apt-get install -f -y php5.6
