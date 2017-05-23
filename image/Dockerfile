@@ -23,7 +23,6 @@ RUN export LANG=C.UTF-8 &&\
                           texlive-luatex=2015.2016* \
                           texlive-pstricks=2015.2016* \
                           texlive-xetex=2015.2016* &&\
-                          software-properties-common &&\\
 # free huge amount of unused space
     apt-get purge -f -y make-doc \
                         texlive-fonts-recommended-doc \
@@ -33,19 +32,6 @@ RUN export LANG=C.UTF-8 &&\
                         texlive-metapost-doc \
                         texlive-pictures-doc \
                         texlive-pstricks-doc
-                      
-
-# Install php
-RUN apt-get install -f -y python-software-properties &&\
-    add-apt-repository ppa:ondrej/php &&\
-    apt-get update &&\
-    apt-get install -f -y php5.6
-
-# Install sqlite3
-RUN apt-get install -f -y sqlite3 libsqlite3-dev
-
-#Install git
-RUN apt-get install -f -y git
 
 # clean up all temporary files 
 RUN    apt-get clean &&\
@@ -55,14 +41,6 @@ RUN    apt-get clean &&\
     rm -rf /tmp/* /var/tmp/* &&\
     rm -rf /var/lib/apt/lists/* &&\    
     rm -f /etc/ssh/ssh_host_*
-
-
-
-RUN git clone https://github.com/mqzry/stacks-bootstrap.git /var/stacks-bootstrap &&\
-cd /var/stacks-bootstrap &&\
-./bootstrap.sh
-
-VOLUME ["/doc/", "/usr/share/fonts/external/"]
 
 ADD scripts /bin/
 
